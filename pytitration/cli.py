@@ -186,10 +186,22 @@ def sub_select_data(data: List, selection: List) -> List:
 
 
 @click.command()
-@click.option("-c", "--csv", help="Input file")
-@click.option("-n", "--name", help="Input file")
-@click.option("-r", "--range", "nuc_range", help="Input file")
+@click.option(
+    "-c", "--csv", help="Input csv file with dir and conc columns", required=True
+)
+@click.option("-n", "--name", help="the construct name to use", required=True)
+@click.option(
+    "-r",
+    "--range",
+    "nuc_range",
+    help="the nucleotides to use to average",
+    required=True,
+)
 def cli(csv, name, nuc_range):
+    """
+    A simple program that takes chemical mapping data with different titrating conditions
+    and computes the Kd and hill coefficient for the titration.
+    """
     setup_applevel_logger()
     log.info("Starting pytitration")
     log.info("CSV: %s", csv)
