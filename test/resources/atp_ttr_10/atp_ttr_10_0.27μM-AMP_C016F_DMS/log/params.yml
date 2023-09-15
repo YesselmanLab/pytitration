@@ -1,0 +1,30 @@
+bit_vector:
+  map_score_cutoff: 25
+  num_of_surbases: 10
+  plot_sequence: true
+  qscore_cutoff: 25
+  skip: false
+  stricter_constraints:
+    min_mut_distance: 5
+    mutation_count_cutoff: 5
+    percent_length_cutoff: 0.5
+  summary_output_only: false
+dirs:
+  input: input
+  log: log
+  output: output
+docker:
+  cont-name: rna-map-cont
+  image: rna-map
+  platform: ''
+map:
+  bt2_alignment_args: --local;--no-unal;--no-discordant;--no-mixed;-X 1000;-L 12;-p
+    16
+  save_unaligned: false
+  skip: false
+  skip_fastqc: false
+  skip_trim_galore: false
+  tg_q_cutoff: 20
+overwrite: false
+restore_org_behavior: false
+stricter_bv_constraints: true
