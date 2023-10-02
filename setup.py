@@ -35,7 +35,7 @@ setup(
     package_dir={"pytitration": "pytitration"},
     py_modules=["pytitration/cli"],
     include_package_data=True,
-    install_requires=requirements,
+    #install_requires=requirements,
     zip_safe=False,
     keywords="pytitration",
     classifiers=[

@@ -9,7 +9,13 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy import optimize
+import pickle
 
+from rna_map.mutation_histogram import (
+    MutationHistogram,
+    convert_dreem_mut_histos_to_mutation_histogram,
+)
+from dreem.bit_vector import MutationHistogram as DREEMMutationHistogram
 
 # logging #####################################################################
 
@@ -218,13 +224,18 @@ def cli(csv, name, nuc_range):
         log.error("No 'conc' column in CSV file.")
         exit(1)
     for i, row in df.iterrows():
-        json_path = row["dir"] + "/output/BitVector_Files/mutation_histos.json"
-        if not os.path.isfile(json_path):
-            raise ValueError("No JSON file found at: " + json_path)
-        mut_histos = json.load(open(json_path))
+        pickle_path = row["dir"] + "/output/BitVector_Files/mutation_histos.p"
+
+        if not os.path.isfile(pickle_path):
+            raise ValueError("No Pickel file found at: " + pickle_path)
+        with open(pickle_path, "rb") as f:
+            mut_histos = pickle.load(f)
+        type_val = type(list(mut_histos.values())[0])
+        if type_val == DREEMMutationHistogram:
+            mut_histos = convert_dreem_mut_histos_to_mutation_histogram(mut_histos)
         if name not in mut_histos:
             raise ValueError("No data found for: " + name)
-        cur_mut_histo = mut_histos[name]
+        cur_mut_histo = mut_histos[name].get_dict()
         pop_avg = get_pop_avg(cur_mut_histo)
         avg = np.average(sub_select_data(pop_avg, num_range))
         data.append([row["conc"], avg])

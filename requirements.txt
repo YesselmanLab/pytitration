@@ -3,3 +3,5 @@ pandas
 click
 pytest
 matplotlib
+dreem @ git+https://github.com/jyesselm/dreem@main
+rna_map @ git+https://github.com/YesselmanLab/rna_map@main
