@@ -225,7 +225,6 @@ def cli(csv, name, nuc_range):
         exit(1)
     for i, row in df.iterrows():
         pickle_path = row["dir"] + "/output/BitVector_Files/mutation_histos.p"
-
         if not os.path.isfile(pickle_path):
             raise ValueError("No Pickel file found at: " + pickle_path)
         with open(pickle_path, "rb") as f:
