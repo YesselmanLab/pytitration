@@ -22,7 +22,7 @@ with open("requirements.txt", "r", encoding="UTF-8") as f:
 
 setup(
     name="pytitration",
-    version="0.1.0",
+    version="0.2.0",
     description="a short script to compute kd and hill coefficients from chemical mapping data",
     long_description=readme,
     long_description_content_type="test/markdown",
@@ -35,7 +35,7 @@ setup(
     package_dir={"pytitration": "pytitration"},
     py_modules=["pytitration/cli"],
     include_package_data=True,
-    #install_requires=requirements,
+    install_requires=requirements,
     zip_safe=False,
     keywords="pytitration",
     classifiers=[
